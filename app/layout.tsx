@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     google: '여기에_구글_인증_코드를_입력하세요',
     other: {
       // TODO: 네이버 서치어드바이저에서 발급받은 HTML 태그 안의 content 값을 여기에 붙여넣습니다.
-      'naver-site-verification': ['여기에_네이버_인증_코드를_입력하세요'],
+      'naver-site-verification': ['f2e17b12e06bf0089d0b38e4cf047c53974bd8a2'],
     },
   },
 };
