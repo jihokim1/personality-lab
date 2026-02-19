@@ -38,33 +38,39 @@ export default function Home() {
               hover:flex-[4] md:hover:flex-[3] ${cat.bg}
             `}
           >
-            {/* [수정 완료] 기본 상태: 아이콘과 정방향 세로 쓰기 텍스트 */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300 group-hover:opacity-0 py-8">
-              <span className="text-4xl md:text-5xl mb-6 drop-shadow-md">{cat.icon}</span>
+            {/* [수정 완료] 기본 상태: 아이콘과 정방향 세로 쓰기 텍스트 (모바일과 PC 레이아웃 분리) */}
+            <div className="absolute inset-0 flex flex-row md:flex-col items-center justify-center opacity-100 transition-opacity duration-300 group-hover:opacity-0 py-4 md:py-8 gap-3 md:gap-0">
+              <span className="text-3xl md:text-5xl md:mb-6 drop-shadow-md">{cat.icon}</span>
               
               {/* 회전(-rotate-90)을 제거하고, 글자를 한 자씩 분리하여 위아래로 쌓습니다. */}
-              <h2 className="text-white font-bold text-2xl md:text-3xl flex flex-col items-center gap-1 md:gap-2 drop-shadow-md">
-                {cat.title.split('').map((char, idx) => (
-                  char === ' ' 
-                    ? <span key={idx} className="h-2 md:h-3 block"></span> // 띄어쓰기 여백 처리
-                    : <span key={idx} className="leading-none">{char}</span>
-                ))}
+              <h2 className="text-white font-bold text-xl md:text-3xl drop-shadow-md whitespace-nowrap tracking-widest md:tracking-normal">
+                {/* 💡 핵심: 모바일용 텍스트 (가로 배치) */}
+                <span className="md:hidden">{cat.title}</span>
+                
+                {/* 💡 핵심: PC용 텍스트 (세로 배치) */}
+                <span className="hidden md:flex flex-col items-center gap-1 md:gap-2">
+                  {cat.title.split('').map((char, idx) => (
+                    char === ' ' 
+                      ? <span key={idx} className="h-2 md:h-3 block"></span> // 띄어쓰기 여백 처리
+                      : <span key={idx} className="leading-none">{char}</span>
+                  ))}
+                </span>
               </h2>
             </div>
 
             {/* 확장 상태 (마우스를 올려 넓어졌을 때 나타나는 상세 콘텐츠) */}
-            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 opacity-0 transition-opacity duration-700 delay-100 group-hover:opacity-100 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+            <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-12 opacity-0 transition-opacity duration-700 delay-100 group-hover:opacity-100 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
               <div className="translate-y-8 transition-transform duration-700 group-hover:translate-y-0">
-                <span className="text-6xl md:text-8xl drop-shadow-2xl mb-4 block">{cat.icon}</span>
-                <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+                <span className="text-5xl md:text-8xl drop-shadow-2xl mb-2 md:mb-4 block hidden sm:block">{cat.icon}</span>
+                <h2 className="text-2xl md:text-5xl font-black text-white mb-2 md:mb-4 tracking-tight">
                   {cat.title} 테스트
                 </h2>
-                <p className="text-white/80 text-lg md:text-xl font-medium mb-8 max-w-md break-keep leading-relaxed">
+                <p className="text-white/80 text-sm md:text-xl font-medium mb-4 md:mb-8 max-w-md break-keep leading-relaxed hidden sm:block">
                   {cat.desc}
                 </p>
-                <div className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                <div className="inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 bg-white text-black rounded-full font-bold text-sm md:text-lg hover:scale-105 transition-transform w-max">
                   시작하기 
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                  <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </div>
               </div>
             </div>
