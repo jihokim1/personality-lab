@@ -57,6 +57,21 @@ export default function RootLayout({
         </div>
         <Footer />
 
+        {/* 💡 구글 애널리틱스 (GA4) 추적 스크립트 적용 */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8C87S3MH5F"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8C87S3MH5F');
+          `}
+        </Script>
+
         {/* 💡 네이버 애널리틱스 추적 스크립트 (완료) */}
         <Script src="//wcs.naver.net/wcslog.js" strategy="afterInteractive" />
         <Script id="naver-analytics" strategy="afterInteractive">
