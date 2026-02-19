@@ -1,7 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script'; // 💡 Next.js 전용 스크립트 컴포넌트 추가
+import Script from 'next/script';
 import './globals.css';
 import Footer from '@/app/components/Footer';
 
@@ -35,8 +35,10 @@ export const metadata: Metadata = {
     images: ['https://personalitylab.store/og-image.jpg'],
   },
   verification: {
-    google: '여기에_구글_인증_코드를_입력하세요',
+    // 💡 구글 소유권 확인 코드 (잘린 부분 없이 복사한 전체 코드를 넣어주세요)
+    google: '--40z4zjCLZbhLG8_Y3TSw1CIn9avMhmswcltv_구글_전체_코드를_여기에_붙여넣으세요',
     other: {
+      // 네이버 소유권 확인 코드 (완료)
       'naver-site-verification': ['f2e17b12e06bf0089d0b38e4cf047c53974bd8a2'],
     },
   },
@@ -55,7 +57,7 @@ export default function RootLayout({
         </div>
         <Footer />
 
-        {/* 💡 네이버 애널리틱스 추적 스크립트 적용 */}
+        {/* 💡 네이버 애널리틱스 추적 스크립트 (완료) */}
         <Script src="//wcs.naver.net/wcslog.js" strategy="afterInteractive" />
         <Script id="naver-analytics" strategy="afterInteractive">
           {`
