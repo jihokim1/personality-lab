@@ -1,65 +1,77 @@
-import Image from "next/image";
+// app/page.tsx
+import Link from 'next/link';
+
+// 카테고리 데이터
+const categories = [
+  { id: 'investment', icon: '💰', title: '투자 성향', desc: '나의 재테크 스타일과 위험 선호도는?', bg: 'bg-emerald-500', hoverBg: 'hover:bg-emerald-600' },
+  { id: 'travel', icon: '✈️', title: '여행 성향', desc: '한 달 살기? 호캉스? 나의 여행 스타일은?', bg: 'bg-sky-500', hoverBg: 'hover:bg-sky-600' },
+  { id: 'work', icon: '💼', title: '업무 성향', desc: '조직 내에서 나의 업무 처리 방식은?', bg: 'bg-indigo-500', hoverBg: 'hover:bg-indigo-600' },
+  { id: 'romance', icon: '❤️', title: '연애 성향', desc: '나의 연애 세포와 찰떡궁합 유형은?', bg: 'bg-rose-500', hoverBg: 'hover:bg-rose-600' },
+  { id: 'sexual', icon: '🔞', title: '성적 성향', desc: '나만의 은밀한 성적 취향 알아보기', bg: 'bg-red-600', hoverBg: 'hover:bg-red-700' },
+  { id: 'sensitivity', icon: '🥺', title: '예민함 척도', desc: '나는 얼마나 예민하고 섬세한 사람일까?', bg: 'bg-amber-500', hoverBg: 'hover:bg-amber-600' },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="flex min-h-screen flex-col items-center justify-center bg-zinc-950 p-4 md:p-8 overflow-hidden font-sans">
+      
+      {/* 헤더 타이포그래피 */}
+      <div className="w-full text-center mb-10 z-10">
+        <h1 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-3">
+          DISCOVER <span className="text-zinc-500">YOURSELF</span>
+        </h1>
+        <p className="text-zinc-400 font-medium tracking-wide">
+          6가지 테마로 알아보는 당신의 진짜 모습
+        </p>
+      </div>
+
+      {/* 인터랙티브 확장형 아코디언 레이아웃 */}
+      <div className="flex flex-col md:flex-row w-full max-w-7xl h-[75vh] min-h-[600px] gap-3 md:gap-4">
+        {categories.map((cat) => (
+          <Link
+            key={cat.id}
+            href={`/test/${cat.id}`}
+            className={`
+              group relative flex-1 overflow-hidden rounded-3xl md:rounded-[2.5rem]
+              transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]
+              cursor-pointer border border-white/10
+              hover:flex-[4] md:hover:flex-[3] ${cat.bg}
+            `}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            {/* [수정 완료] 기본 상태: 아이콘과 정방향 세로 쓰기 텍스트 */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center opacity-100 transition-opacity duration-300 group-hover:opacity-0 py-8">
+              <span className="text-4xl md:text-5xl mb-6 drop-shadow-md">{cat.icon}</span>
+              
+              {/* 회전(-rotate-90)을 제거하고, 글자를 한 자씩 분리하여 위아래로 쌓습니다. */}
+              <h2 className="text-white font-bold text-2xl md:text-3xl flex flex-col items-center gap-1 md:gap-2 drop-shadow-md">
+                {cat.title.split('').map((char, idx) => (
+                  char === ' ' 
+                    ? <span key={idx} className="h-2 md:h-3 block"></span> // 띄어쓰기 여백 처리
+                    : <span key={idx} className="leading-none">{char}</span>
+                ))}
+              </h2>
+            </div>
+
+            {/* 확장 상태 (마우스를 올려 넓어졌을 때 나타나는 상세 콘텐츠) */}
+            <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-12 opacity-0 transition-opacity duration-700 delay-100 group-hover:opacity-100 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+              <div className="translate-y-8 transition-transform duration-700 group-hover:translate-y-0">
+                <span className="text-6xl md:text-8xl drop-shadow-2xl mb-4 block">{cat.icon}</span>
+                <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight">
+                  {cat.title} 테스트
+                </h2>
+                <p className="text-white/80 text-lg md:text-xl font-medium mb-8 max-w-md break-keep leading-relaxed">
+                  {cat.desc}
+                </p>
+                <div className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-full font-bold text-lg hover:scale-105 transition-transform">
+                  시작하기 
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+              </div>
+            </div>
+
+          </Link>
+        ))}
+      </div>
+    </main>
   );
 }
