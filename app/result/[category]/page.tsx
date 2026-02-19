@@ -76,14 +76,14 @@ export default function ResultPage() {
           onClick={() => router.push(`/test/${category}`)}
           className="flex-1 py-4 bg-white text-gray-900 text-lg font-bold rounded-xl border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px] active:shadow-none transition-all"
         >
-          🔄 다시 테스트하기
+          다시 테스트하기
         </button>
 
         <Link 
           href="/"
           className="flex-1 py-4 bg-black text-white text-lg font-bold rounded-xl text-center border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-y-[2px] active:shadow-none transition-all"
         >
-          🏠 다른 테스트 보기
+          다른 테스트 보기
         </Link>
       </div>
     </main>
