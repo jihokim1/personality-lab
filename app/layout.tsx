@@ -1,9 +1,9 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import Footer from '@/app/components/Footer';
+import Analytics from '@/app/components/Analytics'; // 💡 분리된 애널리틱스 컴포넌트 불러오기
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -56,33 +56,9 @@ export default function RootLayout({
           {children}
         </div>
         <Footer />
-
-        {/* 💡 구글 애널리틱스 (GA4) 추적 스크립트 적용 */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-8C87S3MH5F"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-8C87S3MH5F');
-          `}
-        </Script>
-
-        {/* 💡 네이버 애널리틱스 추적 스크립트 (완료) */}
-        <Script src="//wcs.naver.net/wcslog.js" strategy="afterInteractive" />
-        <Script id="naver-analytics" strategy="afterInteractive">
-          {`
-            if(!wcs_add) var wcs_add = {};
-            wcs_add["wa"] = "1701b1df18501f0";
-            if(window.wcs) {
-              wcs_do();
-            }
-          `}
-        </Script>
+        
+        {/* 💡 분리된 애널리틱스 컴포넌트 마운트 */}
+        <Analytics />
       </body>
     </html>
   );
